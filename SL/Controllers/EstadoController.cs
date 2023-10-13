@@ -7,14 +7,14 @@ using System.Web.Http;
 
 namespace SL.Controllers
 {
-    [RoutePrefix("api/empleado")]
-    public class EmpleadoController : ApiController
+    [RoutePrefix("api/estado")]
+    public class EstadoController : ApiController
     {
-        [Route("{idEmpleado}")]
-        [HttpDelete]
-        public IHttpActionResult Delete(int idEmpleado)
+        [Route("")]
+        [HttpGet]
+        public IHttpActionResult GetAll()
         {
-            ML.Result result = BL.Empleado.Delete(idEmpleado);
+            ML.Result result = BL.Estado.GetAll();
             if (result.Correct)
             {
                 return Content(HttpStatusCode.OK, result);

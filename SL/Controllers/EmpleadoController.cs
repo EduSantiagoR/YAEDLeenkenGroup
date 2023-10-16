@@ -24,5 +24,69 @@ namespace SL.Controllers
                 return Content(HttpStatusCode.BadRequest, result);
             }
         }
+
+        [Route("")]
+        [HttpGet]
+        public IHttpActionResult GetAll()
+        {
+           
+            ML.Empleado empleado = new ML.Empleado();
+        
+
+            ML.Result result = BL.Empleado.GetAllLINQ();
+            if (result.Correct)
+            {
+                return Content(HttpStatusCode.OK, result);
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, result);
+            }
+        }
+        [Route("{idEmpleado}")]
+        [HttpGet]
+        public IHttpActionResult GetById(int IdEmpleado)
+        {
+            ML.Result result = BL.Empleado.GetById(IdEmpleado);
+            if (result.Correct)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, result);
+            }
+        }
+        [Route("")]
+        [HttpPost]
+        public IHttpActionResult Add(ML.Empleado empleado)
+        {
+            ML.Result result = BL.Empleado.Add(empleado);
+            if (result.Correct)
+            {
+                return Ok(result);
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, result);
+            }
+        }
+
+        [Route("{idUsuario}")]
+        [HttpPut]
+
+        public IHttpActionResult Update(int idUsuario, [FromBody] ML.Empleado empleado)
+        {
+            empleado.Id = idUsuario;
+            ML.Result result = BL.Empleado.Add(empleado);
+            if (result.Correct)
+            {
+                return Content(HttpStatusCode.OK, result);
+            }
+            else
+            {
+                return Content(HttpStatusCode.BadRequest, result);
+            }
+        }
     }
 }

@@ -16,44 +16,44 @@ namespace BL
                 //Todo lo que se eje cute dnetro de using se libera al final, los recursos
                 using (DL.YAEDLeenkedGroupEntities context = new DL.YAEDLeenkedGroupEntities())
                 {
-                    var empleadosLINQ = (from objEmpleado in context.Empleadoes
-                                        join Estado in context.CatEntidadFederativas on objEmpleado.IdEstado equals Estado.IdEstado
+                    var usuariosLINQ = (from objEmpleado in context.Empleadoes
+                                        join CatEntidadFederativa in context.CatEntidadFederativas on objEmpleado.IdEstado equals CatEntidadFederativa.IdEstado
                                         where objEmpleado.Id == IdEmpleado
                                         select new
                                         {
-                                            IdEmpleado   = objEmpleado.Id,
-                                            NumeroNomina   = objEmpleado.NumeroNomina,
-                                            NombreUsuario = objEmpleado.Nombre,
+                                            IdEmpleado = objEmpleado.Id,
+                                            NumeroNomina = objEmpleado.NumeroNomina,
+                                            Nombre = objEmpleado.Nombre,
                                             ApellidoPaterno = objEmpleado.ApellidoPaterno,
                                             ApellidoMaterno = objEmpleado.ApellidoMaterno,
-                                            Estado = Estado.Estado,
-                                            IdEstado = Estado.IdEstado
+                                            IdEstado = CatEntidadFederativa.IdEstado
                                         }).Single();
 
                     result.Objects = new List<object>();
-                    if (empleadosLINQ != null)
+                    if (usuariosLINQ != null)
                     {
 
 
-                        ML.Empleado empleado = new ML.Empleado();
+                        ML.Empleado empleado1 = new ML.Empleado();
 
 
-                        empleado.Id = empleadosLINQ.IdEmpleado;
-                        empleado.Nombre = empleadosLINQ.NombreUsuario;
-                        empleado.NumeroNomina = empleadosLINQ.NumeroNomina;
-                        empleado.ApellidoPaterno = empleadosLINQ.ApellidoPaterno;
-                        empleado.ApellidoMaterno = empleadosLINQ.ApellidoMaterno;
-                        empleado.Estado = new ML.Estado();
-                        empleado.Estado = empleado.Estado;
-                       
-                        result.Object = empleado;
+                        empleado1.Id = usuariosLINQ.IdEmpleado;
+                        empleado1.NumeroNomina = usuariosLINQ.NumeroNomina;
+                        empleado1.Nombre = usuariosLINQ.Nombre;
+                        empleado1.ApellidoPaterno = usuariosLINQ.ApellidoPaterno;
+                        empleado1.ApellidoMaterno = usuariosLINQ.ApellidoMaterno;
+                        empleado1.Estado = new ML.Estado();
+                        empleado1.Estado.IdEstado = usuariosLINQ.IdEstado;
+
+                        result.Objects.Add(empleado1);
+                        result.Object = empleado1;
 
                         result.Correct = true;
                     }
                     else
                     {
                         result.Correct = false;
-                        result.ErrorMessage = "La tabla empleado no contiene registros";
+                        result.ErrorMessage = "La tabla usuario no contiene registros";
                     }
 
                 }

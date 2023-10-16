@@ -8,10 +8,11 @@ using System.Web.Http;
 namespace SL.Controllers
 {
     [RoutePrefix("api/empleado")]
+    
     public class EmpleadoController : ApiController
     {
         [Route("{idEmpleado}")]
-        [HttpDelete]
+        [HttpPost]
         public IHttpActionResult Delete(int idEmpleado)
         {
             ML.Result result = BL.Empleado.Delete(idEmpleado);

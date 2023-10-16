@@ -1,5 +1,6 @@
 ﻿$(document).ready(function () {
     GetAll();
+    EstadoGetAll();
 })
 
 function GetAll() {
@@ -24,22 +25,36 @@ function GetAll() {
             });
         },
         error: function (result) {
-            alert('Error en la consulta.' + result.responseJSON.ErrorMessage);
+            alert('Error en la consulta.' + result.ErrorMessage);
         }
     });
 }
 function Delete(idEmpleado) {
     if (confirm('¿Estas seguro de querer eliminar?')) {
         $.ajax({
-            type: 'DELETE',
-            url: 'http://localhost:64673/api/empleado/' + parseInt(idEmpleado),
+            url: 'http://localhost:64673/api/empleado/' + idEmpleado,
+            type: 'POST',
             success: function (result) {
-                $('#Modal').modal();
                 GetAll();
             },
             error: function (result) {
-                alert('Error al eliminar' + result.responseJSON.ErrorMessage);
+                alert('Error al eliminar ' + result.ErrorMessage);
             }
         });
     }
+}
+function EstadoGetAll() {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:64673/api/estado',
+        success: function (result) {
+            $('#ddlEstados').append('<option value="' + 0 + '">' + 'Selecciona un estado' + '</option>');
+            $.each(result.Objects, function (i, Estado) {
+                $('#ddlEstados').append('<option value="' + Estado.IdEstado + '">' + Estado.Nombre + '</option>');
+            });
+        },
+        error: function (result) {
+            alert('Error al consultar estados', result.ErrorMessage);
+        }
+    });
 }

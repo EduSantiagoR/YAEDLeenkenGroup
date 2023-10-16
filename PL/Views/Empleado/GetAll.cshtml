@@ -4,17 +4,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>GetAll</h2>
+<h2 class="text-center">Empleados</h2>
+<hr />
+<button class="btn btn-success">Agregar</button>
+<hr />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="~/Scripts/Empleado/CRUD.js"></script>
+
 <div class="container">
-    <table id="tablaEmpleados" class="table table-dark table-hover">
+    <table id="tablaEmpleados" class="table table-dark table-hover text-center">
         <thead>
             <tr>
                 <th>Editar</th>
+                <th>Numero nomina</th>
                 <th>Nombre</th>
                 <th>Apellido paterno</th>
                 <th>Apellido materno</th>
+                <th>Estado</th>
+                <th>Eliminar</th>
             </tr>
         </thead>
         <tbody>

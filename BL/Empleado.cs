@@ -78,7 +78,7 @@ namespace BL
                 using (DL.YAEDLeenkedGroupEntities context = new DL.YAEDLeenkedGroupEntities())
                 {
                     var empleadosLINQ = (from objEmpleado in context.Empleadoes
-                                        join Estado in context.Empleadoes on objEmpleado.IdEstado equals Estado.IdEstado
+                                        join Estado in context.CatEntidadFederativas on objEmpleado.IdEstado equals Estado.IdEstado
                                         select new
                                         {
                                             IdEmpleado = objEmpleado.Id,
@@ -86,7 +86,8 @@ namespace BL
                                             NombreUsuario = objEmpleado.Nombre,
                                             ApellidoPaterno = objEmpleado.ApellidoPaterno,
                                             ApellidoMaterno = objEmpleado.ApellidoMaterno,
-                                            Estado = Estado.IdEstado
+                                            IdEstado = Estado.IdEstado,
+                                            NombreEstado = Estado.Estado
                                         }).ToList();
 
                     result.Objects = new List<object>();
@@ -104,7 +105,8 @@ namespace BL
                             empleado.ApellidoPaterno = obj.ApellidoPaterno;
                             empleado.ApellidoMaterno = obj.ApellidoMaterno;
                             empleado.Estado = new ML.Estado();
-                            empleado.Estado = empleado.Estado;
+                            empleado.Estado.IdEstado = obj.IdEstado;
+                            empleado.Estado.Nombre = obj.NombreEstado;
                             result.Objects.Add(empleado);
                         }
                         result.Correct = true;

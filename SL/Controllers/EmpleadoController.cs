@@ -78,7 +78,7 @@ namespace SL.Controllers
         public IHttpActionResult Update(int idUsuario, [FromBody] ML.Empleado empleado)
         {
             empleado.Id = idUsuario;
-            ML.Result result = BL.Empleado.Add(empleado);
+            ML.Result result = BL.Empleado.Update(empleado);
             if (result.Correct)
             {
                 return Content(HttpStatusCode.OK, result);

@@ -3,13 +3,27 @@
     ViewBag.Title = "GetAll";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+<head>
 
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="~/Scripts/Empleado/CRUD.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+
+</head>
 <h2 class="text-center">Empleados</h2>
 <hr />
-<button class="btn btn-success">Agregar</button>
+<!-- Botón que abrirá el modal -->
+<!-- Botón que abrirá el modal -->
+<button type="button" class="btn btn-primary"  data-toggle="modal" onclick="Limpiar()" data-target="#myModal">Agregar Empleado</button>
 <hr />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="~/Scripts/Empleado/CRUD.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <div class="container">
     <table id="tablaEmpleados" class="table table-dark table-hover text-center">
@@ -28,3 +42,61 @@
         </tbody>
     </table>
 </div>
+
+
+
+
+
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div>
+
+
+                </div>
+                <h5 class="modal-title">Agregar Empleado</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input type="text" hidden class="form-control" id="txtIdEmpleado" placeholder="Id Empleado"/>
+                    <input type="text" class="form-control" id="txtNumeroNomina" placeholder="Numero de nomina" />
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input type="text" class="form-control" id="txtNombre" placeholder="Nombre" />
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input type="text" class="form-control" id="txtApellidoPaterno" placeholder="Apellido Paterno" />
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input type="text" class="form-control" id="txtApellidoMaterno" placeholder="Apellido Materno" />
+                </div>
+                <div class="input-group input-group-sm mb-3">
+                    <div class="input-group-prepend">
+                    </div>
+                    <input type="number" class="form-control" id="txtEstado" placeholder="Id Estado" />
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="Guardar()"  class="btn btn-success"  data-dismiss="modal">Guardar</button>
+                <button type="button"  onclick="modalClose()" class="btn btn-danger"  data-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

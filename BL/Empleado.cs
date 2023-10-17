@@ -46,7 +46,6 @@ namespace BL
                         empleado1.Estado.IdEstado = usuariosLINQ.IdEstado;
 
                         result.Objects.Add(empleado1);
-                        result.Object = empleado1;
 
                         result.Correct = true;
                     }
@@ -139,6 +138,7 @@ namespace BL
                 using(DL.YAEDLeenkedGroupEntities context = new DL.YAEDLeenkedGroupEntities())
                 {
                     DL.Empleado empleadoNuevo = new DL.Empleado();
+                    empleadoNuevo.Id = empleado.Id;
                     empleadoNuevo.Nombre = empleado.Nombre;
                     empleadoNuevo.NumeroNomina = empleado.NumeroNomina;
                     empleadoNuevo.ApellidoPaterno = empleado.ApellidoPaterno;

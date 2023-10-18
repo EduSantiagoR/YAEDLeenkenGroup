@@ -43,9 +43,6 @@ function Delete(idEmpleado) {
         });
     }
 }
-
-
-
 function Guardar() {
     var id = parseInt($('#txtIdEmpleado').val());
     if (!isNaN(id))  {
@@ -63,9 +60,6 @@ function Limpiar() {
     $('#txtApellidoPaterno').val(''),
     $('#txtApellidoMaterno').val(''),
     $('#txtEstado').val('')
-    
-
-
 }
 function AddEmpleado() {
     var nuevoEmpleado = {
@@ -94,22 +88,74 @@ function AddEmpleado() {
                 alert('Error al agregar empleado: ' + result.ErrorMessage);
             }
         });
-
     modalClose();
-    }
 }
 function EstadoGetAll() {
     $.ajax({
         type: 'GET',
         url: 'http://localhost:64673/api/estado',
         success: function (result) {
-            $('#ddlEstados').append('<option value="' + 0 + '">' + 'Selecciona un estado' + '</option>');
             $.each(result.Objects, function (i, Estado) {
-                $('#ddlEstados').append('<option value="' + Estado.IdEstado + '">' + Estado.Nombre + '</option>');
+                $('#txtEstado').append('<option value="' + Estado.IdEstado + '">' + Estado.Nombre + '</option>');
             });
         },
         error: function (result) {
             alert('Error al consultar estados', result.ErrorMessage);
         }
     });
+}
+
+function UpdateEmpleado(idEmpleado) {
+
+    var NuevoEmpleado = {
+        Id: 0,
+        NumeroNomina: $('#txtNumeroNomina').val(),
+        Nombre: $('#txtNombre').val(),
+        ApellidoPaterno: $('#txtApellidoPaterno').val(),
+        ApellidoMaterno: $('#txtApellidoMaterno').val(),
+        Estado: {
+            IdEstado: $('#txtEstado').val()
+        }
+    };
+
+    $.ajax({
+        type: 'PUT',
+        url: 'http://localhost:64673/api/empleado/' + parseInt(idEmpleado),
+        datatype: 'JSON',
+        data: NuevoEmpleado,
+        success: function (result) {
+            $('#myModal').modal('show');
+            GetAll();
+
+        },
+        error: function (result) {
+            alert('Error en la consulta.' + result.ErrorMessage);
+        }
+    });
+    modalClose();
+};
+function GetById(id) {
+    $.ajax({
+        type: 'GET',
+        url: 'http://localhost:64673/api/empleado/' + parseInt(id),
+        success: function (result) {
+            $.each(result.Objects, function (i, Empleado) {
+                $('#txtIdEmpleado').val(Empleado.Id);
+                $('#txtNumeroNomina').val(Empleado.NumeroNomina);
+                $('#txtNombre').val(Empleado.Nombre);
+                $('#txtApellidoPaterno').val(Empleado.ApellidoPaterno);
+                $('#txtApellidoMaterno').val(Empleado.ApellidoMaterno);
+                $('#txtEstado').val(Empleado.Estado.IdEstado);
+            });
+            $('#myModal').modal('show');
+        },
+        error: function (result) {
+            alert('Error al obtener el empleado: ' + result.ErrorMessage);
+        }
+    });
+
+};
+
+function modalClose() {
+    $('#myModal').modal('hide');
 }
